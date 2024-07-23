@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to right, rgb(168, 233, 255), rgb(194, 240, 255));
+}
+
+#card {
+  width: 250px;
+  height: 250px;
+  background: linear-gradient(to bottom, rgb(255, 44, 44), rgb(255, 100, 100));
+  border-radius: 1rem;
+  cursor: pointer;
+  /* transition: all .1s ease; */
+}
