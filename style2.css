@@ -4,19 +4,34 @@
   padding: 0;
 }
 
+:root {
+  --blue: #9eccfa80;
+  --light-orange: #ffbf00;
+  --orange: #ff930e;
+}
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(to right, rgb(168, 233, 255), rgb(194, 240, 255));
+  background-color: #9eccfa80;
 }
 
 #card {
-  width: 250px;
-  height: 250px;
-  background: linear-gradient(to bottom, rgb(255, 44, 44), rgb(255, 100, 100));
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(
+    to bottom right,
+    var(--light-orange),
+    var(--orange)
+  );
   border-radius: 1rem;
   cursor: pointer;
-  /* transition: all .1s ease; */
+  transition: all 0.2s ease;
 }
+
+/* #card:hover {
+  transform: perspective(400px) rotate3d(-1, 1, 0, 20deg); */
+/* transform: perspective(400px) rotateX(-45deg) rotateY(-45deg); */
+/* } */

@@ -19,9 +19,13 @@ card.addEventListener("mousemove", (e) => {
 
   const maxDistance = Math.max(halfWidth, halfHeight); // the maximum distance from the corner to the center of the card;
 
-  const degree = mapNumberRange(distanceToCenter, 0, maxDistance, 0, 10); //?????????
+  // console.log("MAX Distance", maxDistance);
+  // console.log("distance to center", distanceToCenter/maxDistance);
 
-  // console.log("degree", degree);
+  const degree = mapNumberRange(distanceToCenter, 0, maxDistance, 0, 10); //?????????
+  const degree1 = (distanceToCenter * 10) / maxDistance;
+
+  // console.log(degree, degree1);
 
   const rx = mapNumberRange(deltaY, 0, halfWidth, 0, 1); //?????????
   const ry = mapNumberRange(deltaX, 0, halfHeight, 0, 1); //?????????
