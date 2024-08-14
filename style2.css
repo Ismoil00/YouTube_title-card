@@ -5,7 +5,7 @@
 }
 
 :root {
-  --blue: #9eccfa80;
+  --blue: #ffffff;
   --light-orange: #ffbf00;
   --orange: #ff930e;
 }
@@ -29,9 +29,26 @@ body {
   border-radius: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
+    0 8px 10px -6px rgb(0 0 0 / 0.1);
 }
 
-/* #card:hover {
-  transform: perspective(400px) rotate3d(-1, 1, 0, 20deg); */
-/* transform: perspective(400px) rotateX(-45deg) rotateY(-45deg); */
-/* } */
+#gloss {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  will-change: opacity;
+  transition: 0.2s opacity ease-out;
+}
