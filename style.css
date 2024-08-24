@@ -1,75 +1,47 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  background-color: #96a7b0;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
+  --white: #ffffff;
+  --light-orange: #ffbf00;
+  --orange: #ff930e;
 }
 
 body {
-  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  background-color: var(--white);
 }
 
-.card {
-  padding: 10px;
+#card {
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(
+    to bottom right,
+    var(--light-orange),
+    var(--orange)
+  );
+  border-radius: 1rem;
   cursor: pointer;
-}
-
-.card__image {
-  aspect-ratio: 16 / 9;
-  width: 100%;
-  object-fit: cover;
-}
-
-.card__content {
+  transition: all 0.2s ease;
+  position: relative;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1),
     0 8px 10px -6px rgb(0 0 0 / 0.1);
-  background: whitesmoke;
-  border-radius: 10px;
-  width: 100%;
-  max-width: 300px;
-  will-change: transform;
-  transition: transform 0.25s ease-out;
 }
 
-.card__title {
-  color: hsl(201, 14%, 20%);
-  font-size: 20px;
-  padding: 10px 14px 5px;
-  margin: 0;
-}
-
-.card__description {
-  margin: 0;
-  padding: 0 14px 10px;
-  font-size: 14px;
-  color: hsl(201, 14%, 40%);
-  text-align: left;
-}
-
-.card__gloss {
+#gloss {
   opacity: 0;
-  z-index: 10;
   width: 100%;
   height: 100%;
+  position: absolute;
   left: 0;
   top: 0;
   border-radius: 50%;
@@ -79,10 +51,6 @@ body {
     rgba(255, 255, 255, 0) 50%,
     rgba(255, 255, 255, 0) 100%
   );
-  position: absolute;
   will-change: opacity;
-}
-
-.card__gloss.card__gloss--animatable {
-  transition: 0.25s opacity ease-out;
+  transition: 0.2s opacity ease-out;
 }

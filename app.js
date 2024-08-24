@@ -1,80 +1,36 @@
-/***********************
- *    Helper Functions   *
- ***********************/
+const card = document.getElementById("card");
+const gloss = document.getElementById("gloss");
 
-function mapNumberRange(n, a, b, c, d) {
-  return ((n - a) * (d - c)) / (b - a) + c;
-}
+card.addEventListener("mousemove", (e) => {
+  const pointerX = e.clientX; // x-coordinate of mouse cursor relative to the left edge of the browser;
+  const pointerY = e.clientY; // y-coordinate of mouse cursor relative to the top edge of the browser;
 
-/***********************
- *        Setup        *
- ***********************/
+  const cardRect = card.getBoundingClientRect(); // it returns a DOMRect object representing the size of an element and its position relative to the viewport;
 
-function setup() {
-  Array.from(document.querySelectorAll(".card")).map((cardEl) =>
-    initCard(cardEl)
-  );
-}
+  const halfWidth = cardRect.width / 2;
+  const halfHeight = cardRect.height / 2;
 
-/***********************
- *      initCard       *
- ***********************/
+  const cardCenterX = cardRect.left + halfWidth; // x-coordinate of the card center relative to the left edge;
+  const cardCenterY = cardRect.top + halfHeight; // y-coordinate of the card center relative to the left edge;
 
-function initCard(card) {
-  const cardContent = card.querySelector(".card__content");
-  const gloss = card.querySelector(".card__gloss");
+  const deltaX = pointerX - cardCenterX; // x value relative to the card center;
+  const deltaY = pointerY - cardCenterY; // y value relative to the card center;
 
-  requestAnimationFrame(() => {
-    gloss.classList.add("card__gloss--animatable");
-  });
+  const distanceToCenter = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2)); // from the point to the center of the card;
 
-  card.addEventListener("mousemove", (e) => {
-    const pointerX = e.clientX;
-    const pointerY = e.clientY;
+  const maxDistance = Math.max(halfWidth, halfHeight); // the maximum distance from the corner to the center of the card;
 
-    const cardRect = card.getBoundingClientRect();
+  const degree = (distanceToCenter * 10) / maxDistance;
+  const rx = deltaY / halfHeight;
+  const ry = deltaX / halfWidth;
 
-    const halfWidth = cardRect.width / 2;
-    const halfHeight = cardRect.height / 2;
+  card.style.transform = `perspective(400px) rotate3d(${-rx}, ${ry}, 0, ${degree}deg)`;
 
-    const cardCenterX = cardRect.left + halfWidth;
-    const cardCenterY = cardRect.top + halfHeight;
+  gloss.style.transform = `translate(${-ry * 100}%, ${-rx * 100}%) scale(2.4)`;
+  gloss.style.opacity = (distanceToCenter * 0.6) / maxDistance;
+});
 
-    const deltaX = pointerX - cardCenterX;
-    const deltaY = pointerY - cardCenterY;
-
-    const distanceToCenter = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-    const maxDistance = Math.max(halfWidth, halfHeight);
-
-    const degree = mapNumberRange(distanceToCenter, 0, maxDistance, 0, 10);
-
-    const rx = mapNumberRange(deltaY, 0, halfWidth, 0, 1);
-    const ry = mapNumberRange(deltaX, 0, halfHeight, 0, 1);
-
-    cardContent.style.transform = `perspective(400px) rotate3d(${-rx}, ${ry}, 0, ${degree}deg)`;
-
-    gloss.style.transform = `translate(${-ry * 100}%, ${
-      -rx * 100
-    }%) scale(2.4)`;
-
-    gloss.style.opacity = `${mapNumberRange(
-      distanceToCenter,
-      0,
-      maxDistance,
-      0,
-      0.6
-    )}`;
-  });
-
-  card.addEventListener("mouseleave", () => {
-    cardContent.style = null;
-    gloss.style.opacity = 0;
-  });
-}
-
-/***********************
- *      Start Here     *
- ***********************/
-
-setup();
+card.addEventListener("mouseleave", () => {
+  card.style = null;
+  gloss.style.opacity = 0;
+});
